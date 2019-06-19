@@ -1,0 +1,138 @@
+
+@import './mixins';
+// @import 'sweetalert';
+
+// /* colors */
+$bodyBg: #FBFAF9;
+$bodyFg: #333;
+$headingFg: #8E8D8A;
+$linkFg:#edd040;
+$linkHoverFg: lighten($linkFg, 5%);
+$headerTitleFg:#edd040;
+$headerBg: rgba(31, 31, 29, 0.8);
+$headerFg: #F1F1F1;
+$buttonBg: $linkFg;
+// /* reusables */
+.fl { float: left; }
+.fr { float: right; }
+.clear { clear: both; display: block; }
+.marg-sm { margin: 10px; }
+.marg-md { margin: 30px; }
+.marg-lg { margin: 50px; }
+.pad-sm { padding: 10px; }
+.pad-md { padding: 30px; }
+.pad-lg { padding: 50px; }
+.marg-btm-sm { margin-bottom: 10px; }
+.marg-btm-md { margin-bottom: 30px; }
+.marg-btm-lg { margin-bottom: 50px; }
+.marg-top-sm { margin-top: 10px; }
+.marg-top-md { margin-top: 30px; }
+.marg-top-lg { margin-top: 50px; }
+.marg-left-sm { margin-left: 10px; }
+.marg-left-mdsm { margin-left: 16px; }
+
+// .separator { padding-bottom: 9px; margin: 40px 0 20px; border-bottom: 1px solid #eee; }
+// .pointer { cursor: pointer; }
+
+/* general */
+body {
+  background-color: $bodyBg;
+  color: $bodyFg;
+  text-align: center;
+  a { position: relative; color: $linkFg; text-decoration: none;
+    &:hover, &:focus, &:active { text-decoration: none; color: $linkHoverFg; border-bottom: 1px solid $linkHoverFg; }
+  }
+  p {}
+  h1, h2, h3, h4, h5, h6 { color: $headingFg; }
+}
+
+/* buttons */
+body {
+  .btn {}
+  .btn-primary { background: $buttonBg; border: none; text-shadow: none; box-shadow: none;
+    &:hover, &:active, &:focus { background: darken($buttonBg, 5%); }
+  }
+  .load-more { width: 100%; padding: 1em 0; opacity: 0.75;
+    &:hover { opacity: 1; }
+  }
+}
+
+/* HEADER */
+$headerHeight: 80px;
+header {
+   height: $headerHeight; position: fixed; top: 0; left: 0; right: 0; background: $headerBg; color: $headerFg; z-index: 100; padding: 10px;text-align: center;
+  .title { display: inline-block; font-size: 2.4em; text-transform: uppercase;
+    a {
+      color: $headerTitleFg;
+      letter-spacing: 0.1em;
+      font-weight: 100;
+      padding-left: 50px;
+      &:hover { color: lighten($headerTitleFg, 5%); border: none; }
+    }
+  }
+  a { display: inline-block; color: $headerFg; font-weight: 200; letter-spacing: 0.05em;
+    &:hover, &:focus, &:active { color: lighten($headerFg, 10%); border-bottom: 1px solid lighten($headerFg, 10%); }
+  }
+  .right {
+    float: right;
+    height: $headerHeight; @include flex-center();
+    a { margin-left: 20px; }
+  }
+}
+
+// /* LOADER */
+// .loader-bg { position: fixed; top:$headerHeight; bottom: 0; left:0; right: 0; @include flex-center(); background: rgba(255,255,255,0.5); }
+// .loader-text { margin-right: 186px; font-size: 2em; margin-bottom: 5px; }
+
+/* PAGE BODY */
+.page-body {
+  margin-top: $headerHeight; padding: 50px 0;
+}
+
+// /* POSTS BY TAG */
+// .tag-results { color: $linkFg; }
+
+// /* POST EXCERPT */
+// .post-excerpt { margin-bottom: 60px; }
+// .excerpt-edit-link {font-size: 0.4em; margin-left: 5px; position: relative;bottom: 1px; }
+
+// /* SINGLE POST PAGE */
+// .single-post-page {
+//   .post-content { padding-top: 20px; }
+//   .meta { font-size: 0.8em; color: #B9B9B9; }
+//   .author { color: $linkFg; }
+// }
+
+// /* EDIT POST PAGE */
+// .edit-post-page {
+
+// }
+
+// /* EDIT ACCOUNT PAGE */
+// .edit-account-page {
+//   ul.post-links { padding-left: 0;
+//     li.post-link { list-style-type: none; padding: 5px 0; }
+//   }
+// }
+
+// /* TAGS */
+// .tags { margin-top: 15px;
+//   .form-group { position: relative; top: 3px; }
+//   .input-group { min-width: 267px;
+//     .input-group-addon { border-top-left-radius: 20px; border-bottom-left-radius: 20px; line-height: 19px; padding-right: 10px; }
+//     input[type="text"] { width: auto; }
+//     .input-group-btn { width: auto; display: inline-block;
+//       button { border-top-right-radius: 20px; border-bottom-right-radius: 20px; line-height: 22px; padding-right: 20px; }
+//     }
+//   }
+// }
+// .tag { float: left; display: inline-block; background: $buttonBg; color: #fff; margin: 5px; padding: 5px 12px; border-radius: 20px;
+//   position: relative; z-index: 1;
+//   .text { margin-right: 5px; }
+//   .badge { background-color: #333;
+//     &:hover, &:active, &:focus { background-color: lighten(#333, 10%); cursor: pointer; }
+//   }
+// }
+
+// /* Edit Comment */
+// .default-input { padding: 5px; margin-bottom: 10px; width: 100%; }

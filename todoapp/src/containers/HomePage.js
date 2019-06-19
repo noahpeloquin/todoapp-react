@@ -39,7 +39,7 @@ export class HomePage extends Component {
       <div className="container">
         <Row>
           <Col sm={12} md={8} mdOffset={2}>
-            <h1>The ultimate To-Do List</h1>
+            <h1>The Ultimate To-Do List</h1>
             {notification}
           </Col>
         </Row>

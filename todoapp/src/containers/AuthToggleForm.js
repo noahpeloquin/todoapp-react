@@ -12,7 +12,6 @@ import { connect } from 'react-redux';
 export class AuthToggleForm extends Component {
   static propTypes = {
     errors: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-    mfa_needed: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     loading: PropTypes.bool
   };
 
@@ -34,7 +33,7 @@ export class AuthToggleForm extends Component {
 
   render() {
     let { currentForm } = this.state;
-    let { loading, errors, mfa_needed } = this.props;
+    let { loading, errors } = this.props;
 
     switch (currentForm) {
       case 0:
@@ -47,7 +46,6 @@ export class AuthToggleForm extends Component {
               <LoginForm
                 loading={loading}
                 errors={errors}
-                mfa_needed={mfa_needed}
                 showRegistration={this._showRegisterForm}
               />
             </Col>
@@ -62,7 +60,7 @@ export class AuthToggleForm extends Component {
               </PageHeader>
               <RegisterForm loading={loading} errors={errors} />
               <div className="back-to-login" onClick={this._showLoginForm}>
-                <a href="#">
+                <a href="/">
                   <Glyphicon glyph="arrow-left" /> Back to login form
                 </a>
               </div>

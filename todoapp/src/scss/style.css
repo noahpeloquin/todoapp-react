@@ -318,8 +318,7 @@ header {
   background: rgba(31, 31, 29, 0.8);
   color: #F1F1F1;
   z-index: 100;
-  padding: 10px;
-  text-align: center;
+  padding-left: 100px;
 }
 header .title {
   display: inline-block;
@@ -362,6 +361,11 @@ header .right {
 }
 header .right a {
   margin-left: 20px;
+}
+
+.input-group {
+  width: 750px;
+  text-align: center;
 }
 
 /* PAGE BODY */

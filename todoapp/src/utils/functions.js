@@ -1,4 +1,3 @@
-
 import sweetalert from 'sweetalert';
 import * as _ from 'lodash';
 import moment from 'moment';
@@ -53,11 +52,12 @@ export function parseJSON(response) {
 export function passwordValidator(password) {
   // eslint-disable-next-line
   const specChars = new RegExp(/[@()_~`!#$%\^&*+=\-\[\]\\';,/{}|\\":<>\?]/);
-  if (password.length >= 8 // at least 8 chars
-    && /[a-z]/.test(password) // contains lowercase
-    && /[A-Z]/.test(password) // contains uppercase
-    && /\d/.test(password) // contains a number
-    && specChars.test(password) // contains special character
+  if (
+    password.length >= 8 && // at least 8 chars
+    /[a-z]/.test(password) && // contains lowercase
+    /[A-Z]/.test(password) && // contains uppercase
+    /\d/.test(password) && // contains a number
+    specChars.test(password) // contains special character
   ) {
     return true;
   }
@@ -85,7 +85,8 @@ export function equalPasswords(password1, password2) {
  * @returns {string}
  */
 export function api(path) {
-  const API_URL = process.env.REACT_APP_API_URL || `http://${window.location.hostname}:8000`;
+  const API_URL =
+    process.env.REACT_APP_API_URL || `http://${window.location.hostname}:8001`;
   // Could be a a different API location in the future.
   return `${API_URL}${path}`;
 }
@@ -122,24 +123,25 @@ export function dispatchJSONErrors(dispatch, ACTION, error) {
   if (error.response) {
     if (error.response.json) {
       // For handling proper requests
-      return error.response.json().then((data) => {
+      return error.response.json().then(data => {
         dispatch({
           type: ACTION,
-          payload: { errors: data.errors },
+          payload: { errors: data.errors }
         });
         if (data.errors && data.errors.permissions) {
           sweetalert({
             title: 'Error',
             type: 'error',
-            text: 'You do not have sufficient privileges to perform this action.',
-            timer: 5000,
+            text:
+              'You do not have sufficient privileges to perform this action.',
+            timer: 5000
           });
         } else if (data.errors && data.errors.general) {
           sweetalert({
             title: 'Error',
             type: 'error',
             text: `There was an error: ${data.errors.general[0]}`,
-            timer: 5000,
+            timer: 5000
           });
         }
         return Promise.resolve(data);
@@ -148,13 +150,13 @@ export function dispatchJSONErrors(dispatch, ACTION, error) {
     // For handling unexpected 500 errors
     dispatch({
       type: ACTION,
-      payload: { errors: error.response.errors },
+      payload: { errors: error.response.errors }
     });
   } else {
     // For handling another random error
     dispatch({
       type: ACTION,
-      payload: { errors: [error] },
+      payload: { errors: [error] }
     });
   }
   return Promise.resolve();
@@ -172,27 +174,30 @@ export function dispatchJSONErrors(dispatch, ACTION, error) {
 export function get(url, forceLoad = false, trackApiUrlsLoading = true) {
   return (dispatch, getState) => {
     // If we already have the Author. We don't need to load it.
+
     if (
-      (!forceLoad && _.includes(getState().postData.apiUrlsLoaded, url)) ||
-      _.includes(getState().postData.apiUrlsLoading, url)
+      (!forceLoad && _.includes(getState().taskData.apiUrlsLoaded, url)) ||
+      _.includes(getState().taskData.apiUrlsLoading, url)
     ) {
       return Promise.resolve();
     }
+
     // This will triger apiUrlsLoading to increment
     if (trackApiUrlsLoading) {
       dispatch({ type: constants.GET_REQUEST_MADE, payload: { url } });
     }
+
     // Data Fetching
     return fetch(
       api(url),
       tokenize({
-        method: 'get',
-      // eslint-disable-next-line comma-dangle
+        method: 'get'
+        // eslint-disable-next-line comma-dangle
       })
     )
       .then(checkStatus)
       .then(parseJSON)
-      .catch((error) => {
+      .catch(error => {
         dispatchJSONErrors(dispatch, constants.APPLICATION_ERRORS, error);
         // This will allow apiUrlsLoading to decrement
         if (trackApiUrlsLoading) {
@@ -219,21 +224,6 @@ export function clearCachedUserData() {
 export function cacheUserData(object) {
   storage.put('xsrf_token', object.xsrf_token);
   storage.put('jwt_token', object.jwt_token);
-}
-
-/**
- * Update all Two Factor Authentication
- * @param {string} factorName - the Two Factor to add
- * @param {string} string - what to set the token to.
- * @param {boolean} add - add or remove?
- * @returns {void}
- */
-export function updateTwoFactor(factorName, string) {
-  if (string) {
-    storage.put(factorName, string);
-  } else {
-    storage.remove(factorName);
-  }
 }
 
 /**

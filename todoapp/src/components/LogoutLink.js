@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 export class LogoutLink extends Component {
   static propTypes = {
     className: PropTypes.string,
-    dispatch: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   };
 
   constructor(props) {
@@ -27,7 +27,7 @@ export class LogoutLink extends Component {
   render() {
     return (
       <a
-        href="#"
+        href="/"
         className={'sign-out-link ' + this.props.className}
         onClick={this._logout}
       >

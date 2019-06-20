@@ -60,7 +60,7 @@ body {
 /* HEADER */
 $headerHeight: 80px;
 header {
-   height: $headerHeight; position: fixed; top: 0; left: 0; right: 0; background: $headerBg; color: $headerFg; z-index: 100; padding: 10px;text-align: center;
+   height: $headerHeight; position: fixed; top: 0; left: 0; right: 0; background: $headerBg; color: $headerFg; z-index: 100; padding-left: 100px;
   .title { display: inline-block; font-size: 2.4em; text-transform: uppercase;
     a {
       color: $headerTitleFg;
@@ -78,6 +78,11 @@ header {
     height: $headerHeight; @include flex-center();
     a { margin-left: 20px; }
   }
+}
+
+.input-group {
+  width:750px;
+  text-align: center;
 }
 
 // /* LOADER */
